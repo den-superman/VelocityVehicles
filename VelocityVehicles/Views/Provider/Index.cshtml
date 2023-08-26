@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Provider>
+@{
+    ViewData["Title"] = "Providers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>List of Providers(Relation between Automobiles and Stores)</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Automobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Showroom)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Automobile.AutomobileName
+                </td>
+                <td>
+                    @item.Showroom.ShowroomName
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

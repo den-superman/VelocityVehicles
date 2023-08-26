@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Automobile>
+@{
+    ViewData["Title"] = "Automobiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Automobiles</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @if(Model != null){
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="@item.ImagePath" class="card-img-top" />
+                    <div class="card-body">
+                        <p class="card-subtitle">@Html.Raw(item.AutomobileName)</p>
+                        <p class="card-text">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                            </li>
+                            <li class="list-group-item">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                                }
+
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

@@ -1,0 +1,34 @@
+﻿@model VelocityVehicles.Models.Automobile
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<User> UserManager;
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <div class="card" style="width: 18rem;">
+        <img src="@Model.ImagePath" class="card-img-top" />
+        <div class="card-body">
+            <p class="card-subtitle">@Html.Raw(Model.AutomobileName)</p>
+            <p class="card-text">
+                @Html.DisplayFor(modelItem => Model.Price)
+            </p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    @Html.DisplayFor(modelItem => Model.Brand.BrandName)
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-primary">Back</a>
+    </form>
+</div>

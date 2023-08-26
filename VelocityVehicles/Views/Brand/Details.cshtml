@@ -1,0 +1,33 @@
+﻿@model VelocityVehicles.Models.Brand
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.BrandName</h1>
+<p>@Model.BrandDescription</p>
+
+@if(Model.Automobiles != null)
+{
+    @foreach (var item in Model.Automobiles)
+    {
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="@item.ImagePath" class="card-img-top" />
+                <div class="card-body">
+                    <p class="card-subtitle">@Html.Raw(item.AutomobileName)</p>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+}
+<a asp-action="Index" class="btn btn-primary">Back</a>

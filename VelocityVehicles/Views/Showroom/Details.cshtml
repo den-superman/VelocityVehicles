@@ -1,0 +1,33 @@
+﻿@model VelocityVehicles.Models.Showroom
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.ShowroomName</h1>
+<p>@Model.ShowroomDescription</p>
+
+@if (Model.Providers != null)
+{
+    @foreach (var item in Model.Providers)
+    {
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="@item.Automobile.ImagePath" class="card-img-top" />
+                <div class="card-body">
+                    <p class="card-subtitle">@Html.Raw(item.Automobile.AutomobileName)</p>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => item.Automobile.Price)
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayFor(modelItem => item.Automobile.Brand.BrandName)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+}
+<a asp-action="Index" class="btn btn-primary">Back</a>

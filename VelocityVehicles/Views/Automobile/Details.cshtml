@@ -1,0 +1,48 @@
+﻿@model VelocityVehicles.Models.Automobile
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<User> UserManager;
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="@Model.ImagePath" class="card-img-top" />
+            <div class="card-body">
+                <p class="card-subtitle">@Html.Raw(Model.AutomobileName)</p>
+                <p class="card-text">
+                    @Html.DisplayFor(modelItem => Model.Price)
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        @Html.DisplayFor(modelItem => Model.Brand.BrandName)
+                    </li>
+                    <li class="list-group-item">
+
+                        @foreach(var item in Model.Providers)
+                        {
+                            <div class="card border-dark mb-3" style="max-width: 18rem;">
+                                <div class="card-body text-dark">
+                                    <p class="card-text">@item.Showroom.ShowroomName</p>
+                                </div>
+                            </div>
+                        }   
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a>
+                        }
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-primary">Back</a>
